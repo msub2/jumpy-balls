@@ -2,14 +2,6 @@
 
 ![screenshot](assets/favicon/screenshot.jpg)
 
-More info on: https://blog.mozvr.com/jumpy-balls
+This is a fork of the [Jumpy Balls](https://github.com/MozillaVR/jumpy-balls) project by MozillaVR, as the original is no longer maintained or updated by Mozilla and the original links to access it have expired.
 
-A little physics game using:
-- [ecsy](https://ecsy.io)
-- [three.js](https://threejs.org)
-- [ecsy-three](https://github.com/mozillareality/ecsy-three)
-- [ammo.js](https://github.com/kripken/ammo.js/)
-
-Give it a try: https://mixedreality.mozilla.org/jumpy-balls/
-
-Read the blog post: https://blog.mozvr.com/jumpy-balls
+This fork is intended to expand on the original Jumpy Balls to integrate more WebXR features (passthrough, hand tracking, etc) and add additional game content.

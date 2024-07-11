@@ -1,5 +1,5 @@
 {
-  "name": "machine",
+  "name": "jumpy-balls",
   "version": "0.1.0",
   "description": "",
   "main": "index.js",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fernandojsg/machine.git"
+    "url": "git+https://github.com/msub2/jumpy-balls.git"
   },
   "browserify": {
     "transform": [
@@ -27,12 +27,15 @@
       ]
     ]
   },
-  "author": "Fernando Serrano <fernandojsg@gmail.com> (http://fernandojsg.com)",
+  "author": "Daniel Adams <msub2official@gmail.com> (https://www.msub2.com)",
+  "contributors": [
+    "Fernando Serrano <fernandojsg@gmail.com> (http://fernandojsg.com)"
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/fernandojsg/machine/issues"
+    "url": "https://github.com/msub2/jumpy-balls/issues"
   },
-  "homepage": "https://github.com/fernandojsg/machine#readme",
+  "homepage": "https://github.com/msub2/jumpy-balls#readme",
   "dependencies": {
     "ecsy": "^0.2.6",
     "ecsy-three": "^0.0.4",
