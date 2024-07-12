@@ -66,18 +66,20 @@ import {
 } from "./Systems/systems.mjs";
 
 import {
+  ECSYThreeWorld,
+} from "ecsy-three";
+import {
+  AnimationSystem,
   GeometrySystem,
   GLTFLoaderSystem,
-  VRControllerSystem,
-  VisibilitySystem,
-  SDFTextSystem,
-  AnimationSystem,
-  SoundSystem,
+  initialize,
   InputSystem,
-  Text,
-  ECSYThreeWorld,
-  initialize
-} from "ecsy-three";
+  SDFTextSystem,
+  SoundSystem,
+  VisibilitySystem,
+  VRControllerSystem,
+  Text
+} from 'ecsy-three/extras';
 import { Vector3 } from "three";
 
 import * as COMPONENTS from "./Components/components";
