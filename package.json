@@ -14,18 +14,6 @@
     "type": "git",
     "url": "git+https://github.com/msub2/jumpy-balls.git"
   },
-  "browserify": {
-    "transform": [
-      [
-        "babelify",
-        {
-          "presets": [
-            "es2015"
-          ]
-        }
-      ]
-    ]
-  },
   "author": "Daniel Adams <msub2official@gmail.com> (https://www.msub2.com)",
   "contributors": [
     "Fernando Serrano <fernandojsg@gmail.com> (http://fernandojsg.com)"
@@ -39,8 +27,7 @@
     "ecsy": "^0.3.0",
     "ecsy-three": "^0.0.6",
     "three": "^0.117.1",
-    "webxr-polyfill": "^2.0.1",
-    "troika-3d-text": "0.17.0"
+    "webxr-polyfill": "^2.0.1"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
