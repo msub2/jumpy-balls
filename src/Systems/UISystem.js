@@ -121,7 +121,7 @@ export class UISystem extends System {
           lineHeight: 0,
           text: button.text
         })
-        .addComponent(Position, { value: new THREE.Vector3(0, 0.03, 0.01) })
+        .addComponent(Position, { value: new THREE.Vector3(0, 0.00, 0.01) })
         .addComponent(Parent, { value: entity });
     }
   }
