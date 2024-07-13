@@ -34,7 +34,8 @@ import {
   Visible,
   UI,
   Button,
-  WebGLRendererContext
+  WebGLRendererContext,
+  Ad,
 } from "./Components/components.js";
 
 import * as Materials from "./materials.js";
@@ -83,6 +84,8 @@ import {
 import { Vector3 } from "three";
 
 import * as COMPONENTS from "./Components/components";
+
+import ZestyBanner from './vendor/zesty-threejs-sdk.js';
 
 var world;
 
@@ -134,7 +137,8 @@ function initGame() {
     .registerComponent(Transform)
     .registerComponent(Visible)
     .registerComponent(UI)
-    .registerComponent(Button);
+    .registerComponent(Button)
+    .registerComponent(Ad);
 
   world
     .registerSystem(InputSystem)
@@ -210,6 +214,100 @@ function initGame() {
 
     audio.setMediaElementSource(mediaElement);
 
+    // @todo This first one remove
+    world.execute(0.016, 0);
+
+    const renderer = data.entities.renderer.getComponent(WebGLRendererContext).value;
+    const banner = new ZestyBanner("1034346e-74d9-49f3-ac1c-a04b77a12cea", 'mobile-phone-interstitial', 'standard', 1.5, renderer);
+    const zestyBanner = world.createEntity("zestyBanner")
+      .addComponent(OnObject3DAdded, {
+        callback: obj => {
+          obj.add(banner);
+        }
+      })
+      .addComponent(Position, { value: new THREE.Vector3(-1.5, 1.6, -2) })
+      .addComponent(Parent, { value: data.entities.scene })
+      .addComponent(Ad)
+      .addComponent(UI)
+      .addComponent(Button, { text: "", onClick: banner.onClick })
+      .addComponent(Visible, { value: true })
+      .addComponent(GLTFLoader, {
+        url: "assets/models/panelinfo.glb",
+        onLoaded: model => {
+          model.children[0].material = Materials.UIMaterial.clone();
+          model.children[0].renderOrder = 1;
+          model.rotateZ(-Math.PI / 2);
+          model.translateZ(-0.01);
+          model.scale.set(1, 1.2, 1.2);
+        }
+      });
+
+    const newsPanel = world.createEntity("newsPanel")
+      .addComponent(Position, { value: new THREE.Vector3(1.5, 1.6, -2) })
+      .addComponent(Parent, { value: data.entities.scene })
+      .addComponent(Visible, { value: true })
+      .addComponent(GLTFLoader, {
+        url: "assets/models/panelinfo.glb",
+        onLoaded: model => {
+          model.children[0].material = Materials.UIMaterial.clone();
+          model.children[0].renderOrder = 1;
+          model.rotateZ(-Math.PI / 2);
+          model.translateZ(-0.01);
+          model.scale.set(1, 1.2, 1.2);
+        }
+      });
+
+    const adText = world.createEntity("adText")
+    .addComponent(Position, { value: new THREE.Vector3(-1.5, 2.75, -2) })
+      .addComponent(Parent, { value: data.entities.scene })
+      .addComponent(UI)
+      .addComponent(Visible, { value: true })
+      .addComponent(Text, {
+        color: "#FFF",
+        font: "assets/fonts/WetinCaroWant.ttf",
+        fontSize: 0.15,
+        anchor: "center",
+        textAlign: "center",
+        baseline: "center",
+        maxWidth: 10,
+        lineHeight: 0,
+        text: "Ad"
+      });
+
+    const newsText = world.createEntity("newsText")
+      .addComponent(Position, { value: new THREE.Vector3(1.5, 2.75, -2) })
+      .addComponent(Parent, { value: data.entities.scene })
+      .addComponent(UI)
+      .addComponent(Visible, { value: true })
+      .addComponent(Text, {
+        color: "#FFF",
+        font: "assets/fonts/WetinCaroWant.ttf",
+        fontSize: 0.15,
+        anchor: "center",
+        textAlign: "center",
+        baseline: "center",
+        maxWidth: 10,
+        lineHeight: 0,
+        text: "News"
+      });
+
+    const futureUpdateText = world.createEntity("futureUpdateText")
+      .addComponent(Position, { value: new THREE.Vector3(1.5, 1.75, -2) })
+      .addComponent(Parent, { value: data.entities.scene })
+      .addComponent(UI)
+      .addComponent(Visible, { value: true })
+      .addComponent(Text, {
+        color: "#FFF",
+        font: "assets/fonts/WetinCaroWant.ttf",
+        fontSize: 0.09,
+        anchor: "center",
+        textAlign: "center",
+        baseline: "center",
+        maxWidth: 1,
+        lineHeight: 1,
+        text: "New updates coming soon!"
+      })
+
     let startButton = world
       .createEntity("startbutton")
       .addComponent(UI)
@@ -242,9 +340,6 @@ function initGame() {
     if (urlParams.has("autostart")) {
       world.getSystem(GameStateSystem).playGame();
     }
-
-    // @todo This first one remove
-    world.execute(0.016, 0);
 
     data.entities.renderer.getComponent(
       WebGLRendererContext

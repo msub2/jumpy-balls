@@ -96,3 +96,5 @@ Raycaster.schema = {
 };
 
 export class Floor extends TagComponent {}
+
+export class Ad extends TagComponent {}

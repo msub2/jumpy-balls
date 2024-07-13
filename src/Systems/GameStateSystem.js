@@ -68,6 +68,11 @@ export class GameStateSystem extends System {
     this.setVisibilityByName("help", false);
     this.setVisibilityByName("startbutton", false);
     this.setVisibilityByName("finished", false);
+    this.setVisibilityByName("zestyBanner", false);
+    this.setVisibilityByName("newsPanel", false);
+    this.setVisibilityByName("adText", false);
+    this.setVisibilityByName("newsText", false);
+    this.setVisibilityByName("futureUpdateText", false);
     this.setVisibilityByName("playingGroup", true);
     this.setVisibilityByName("panelInfo", true);
 
@@ -115,6 +120,12 @@ export class GameStateSystem extends System {
     this.queries.gameState.results[0].getMutableComponent(
       GameState
     ).playing = false;
+  }
+
+  isPlaying() {
+    return this.queries.gameState.results[0].getMutableComponent(
+      GameState
+    ).playing;
   }
 
   execute() {
