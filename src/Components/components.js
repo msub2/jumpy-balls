@@ -43,7 +43,8 @@ GameState.schema = {
   numBallsFailed: { default: 0, type: Types.Number },
   numBallsTotal: { default: 0, type: Types.Number },
   levelStartTime: { default: 0, type: Types.Number },
-  gameStartTime: { default: 0, type: Types.Number }
+  gameStartTime: { default: 0, type: Types.Number },
+  inAR: { default: false, type: Types.Boolean },
 };
 
 export class BallGenerator extends Component {}

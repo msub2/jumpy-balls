@@ -1,5 +1,6 @@
 /* global Ammo */
 import * as THREE from "three";
+import { ARButton } from "three/examples/jsm/webxr/ARButton.js";
 import {
   GameState,
   Geometry,
@@ -299,13 +300,13 @@ function initGame() {
       .addComponent(Text, {
         color: "#FFF",
         font: "assets/fonts/WetinCaroWant.ttf",
-        fontSize: 0.09,
+        fontSize: 0.08,
         anchor: "center",
         textAlign: "center",
         baseline: "center",
         maxWidth: 1,
         lineHeight: 1,
-        text: "New updates coming soon!"
+        text: "7/18/2024 - Passthrough mode added!"
       })
 
     let startButton = world
@@ -344,6 +345,16 @@ function initGame() {
     data.entities.renderer.getComponent(
       WebGLRendererContext
     ).value.outputEncoding = THREE.sRGBEncoding;
+
+    const arButton = ARButton.createButton(renderer);
+    arButton.addEventListener('click', () => {
+      if (arButton.innerText == "Exit AR") {
+        world.getSystem(GameStateSystem).setEnvEnabled(true);
+      } else {
+        world.getSystem(GameStateSystem).setEnvEnabled(false);
+      }
+    })
+    document.body.appendChild(arButton);
   }
 
   function createScene(data) {
@@ -363,7 +374,7 @@ function initGame() {
       .addComponent(Visible, { value: true });
 
     world
-      .createEntity()
+      .createEntity("environment")
       .addComponent(GLTFLoader, {
         url: "assets/models/set.glb",
         onLoaded: model => {
@@ -375,7 +386,8 @@ function initGame() {
           //model.getObjectByName('floor').receiveShadow = true;
         }
       })
-      .addComponent(Parent, { value: data.entities.scene });
+      .addComponent(Parent, { value: data.entities.scene })
+      .addComponent(Visible, { value: true });
 
     world
       .createEntity("help")

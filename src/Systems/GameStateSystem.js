@@ -19,7 +19,7 @@ import {
   FloorCollided,
   GameState
 } from "../Components/components.js";
-import { LevelManager, PhysicsSystem } from "../Systems/systems.mjs";
+import { CameraRigSystem, LevelManager, PhysicsSystem } from "../Systems/systems.mjs";
 
 export class GameStateSystem extends System {
   setVisibilityByName(name, value) {
@@ -126,6 +126,16 @@ export class GameStateSystem extends System {
     return this.queries.gameState.results[0].getMutableComponent(
       GameState
     ).playing;
+  }
+
+  setEnvEnabled(value) {
+    this.setVisibilityByName('environment', value);
+    var gameState = this.queries.gameState.results[0].getComponent(GameState);
+    gameState.inAR = !value;
+    if (!value) {
+      const cameraRig = this.world.getSystem(CameraRigSystem).queries.entities.results[0];
+      cameraRig.getComponent(Object3DComponent).value.position.set(0, 1.6, 0.5);
+    }
   }
 
   execute() {

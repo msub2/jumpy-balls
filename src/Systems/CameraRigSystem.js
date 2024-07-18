@@ -10,6 +10,7 @@ import {
   VRController
 } from "../Components/components.js";
 import { Position } from "ecsy-three/extras";
+import { GameStateSystem } from "./GameStateSystem.js";
 
 export class CameraRigSystem extends System {
   init() {
@@ -18,10 +19,11 @@ export class CameraRigSystem extends System {
 
   execute() {
     this.queries.entities.added.forEach(entity => {
+      const inAR = this.world.getSystem(GameStateSystem).inAR;
       var cameraRig = new THREE.Group();
       entity
         .addComponent(Object3DComponent, { value: cameraRig })
-        .addComponent(Position, { value: new THREE.Vector3(0, 0, 0.5) });
+        .addComponent(Position, { value: new THREE.Vector3(0, inAR ? 1.6 : 0, 0.5) });
 
       // Deactivate all the other cameras
       let activeCams = this.world.entityManager.queryComponents([
