@@ -86,7 +86,7 @@ import { Vector3 } from "three";
 
 import * as COMPONENTS from "./Components/components";
 
-import ZestyBanner from './vendor/zesty-threejs-sdk.js';
+//import ZestyBanner from './vendor/zesty-threejs-sdk.js';
 
 var world;
 
@@ -219,18 +219,18 @@ function initGame() {
     world.execute(0.016, 0);
 
     const renderer = data.entities.renderer.getComponent(WebGLRendererContext).value;
-    const banner = new ZestyBanner("1034346e-74d9-49f3-ac1c-a04b77a12cea", 'mobile-phone-interstitial', 'standard', 1.5, renderer);
+    //const banner = new ZestyBanner("1034346e-74d9-49f3-ac1c-a04b77a12cea", 'mobile-phone-interstitial', 'standard', 1.5, renderer);
     const zestyBanner = world.createEntity("zestyBanner")
       .addComponent(OnObject3DAdded, {
         callback: obj => {
-          obj.add(banner);
+          //obj.add(banner);
         }
       })
       .addComponent(Position, { value: new THREE.Vector3(-1.5, 1.6, -2) })
       .addComponent(Parent, { value: data.entities.scene })
       .addComponent(Ad)
       .addComponent(UI)
-      .addComponent(Button, { text: "", onClick: banner.onClick })
+      //.addComponent(Button, { text: "", onClick: banner.onClick })
       .addComponent(Visible, { value: true })
       .addComponent(GLTFLoader, {
         url: "assets/models/panelinfo.glb",
@@ -346,7 +346,7 @@ function initGame() {
       WebGLRendererContext
     ).value.outputEncoding = THREE.sRGBEncoding;
 
-    const arButton = ARButton.createButton(renderer);
+    const arButton = ARButton.createButton(renderer, { optionalFeatures: ['hand-tracking'] });
     arButton.addEventListener('click', () => {
       if (arButton.innerText == "Exit AR") {
         world.getSystem(GameStateSystem).setEnvEnabled(true);
